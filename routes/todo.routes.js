@@ -16,7 +16,20 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/:id',(req,res)=>{
-    console.log(req.body);
+    if(req.params.id == 3){
+        res.status(404).send('Not Found!');
+    }
+    console.log(req.params.id);
+    let todo = {
+        id: 1 ,
+        title : 'new',
+        status : 'pending'
+    }
+    res.status(200).send(todo)
+});
+
+router.get('/search',(req,res)=>{
+    console.log(req.query,search);
     let todo = {
         id: 1 ,
         title : 'new',

@@ -13,6 +13,10 @@ app.get('/',(req,res)=>{
     res.send('Welcome , But this is the Boiler Plate place only , use propoer routes!')
 });
 
+app.use((req,res)=>{
+    res.status(404).send('Path not found!');
+})
+
 app.listen(port,()=>{
     console.log(`Todo app listening on ${port}!`);
 });
