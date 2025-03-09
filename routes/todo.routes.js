@@ -2,54 +2,59 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/',(req,res)=>{
-    let todoList = [{
-        id: 1 ,
-        title : 'new',
-        status : 'pending'
+const todoList = [
+    {
+        id: 1,
+        title: 'first todo'
     },{
         id: 2,
-        title: 'second',
-        status : 'completed'
-    }]
-    res.send(todoList)
-});
-
-router.get('/:id',(req,res)=>{
-    if(req.params.id == 3){
-        res.status(404).send('Not Found!');
+        title: 'second todo'
+    },{
+        id:3,
+        title: 'third todo'
     }
-    console.log(req.params.id);
-    let todo = {
-        id: 1 ,
-        title : 'new',
-        status : 'pending'
+]
+
+// Traditional Style
+// router.get('/',(req,res)=>{
+//     res.send('todoList')
+// });
+// router.get('/:id',(req,res)=>{
+//     res.status(200).send('todo')
+// });
+// router.get('/search',(req,res)=>{
+//     res.send('todo')
+// })
+// router.post('/',(req,res)=>{
+//     res.send('Todo Added!');
+// });
+// router.put('/:id',(req,res)=>{
+//     res.send('Todo Updated!')
+// });
+// router.delete('/:id',(req,res)=>{
+//     res.send('Todo deleted!')
+// });
+
+router.get('/',(req,res)=>{
+    res.status(200).send(todoList)
+}).get('/:id',(req,res)=>{
+    const todo = todoList.find((todo)=>(todo.id == req.params.id));
+    if(!todo){
+        res.status(404).send('No todo found')
     }
     res.status(200).send(todo)
-});
-
-router.get('/search',(req,res)=>{
-    console.log(req.query,search);
-    let todo = {
-        id: 1 ,
-        title : 'new',
-        status : 'pending'
+}).get('/searchTodo/search',(req,res)=>{
+    const todo = todoList.find((todo)=>(todo.title == req.query.title));
+    if(!todo){
+        res.status(404).send('No todo found')
     }
-    res.send(todo)
+    res.status(200).send(todo)
+}).post('/',(req,res)=>{
+    res.status(201).send('Todo created')
+}).put('/:id',(req,res)=>{
+    res.status(200).send('Todo updated')
+}).delete('/:id',(req,res)=>{
+    res.status(200).send('Todo deleted!')
 })
-
-router.post('/',(req,res)=>{
-    console.log(req.body);
-    res.send('Todo Added!');
-});
-
-router.put('/:id',(req,res)=>{
-    console.log(req.body);
-    res.send('Todo Updated!')
-});
-
-router.delete('/:id',(req,res)=>{
-    res.send('Todo deleted!')
-});
 
 module.exports = router;

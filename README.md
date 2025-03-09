@@ -9,3 +9,7 @@
 3. Crud,
 4. Routes
 5.Simple error handler
+
+09-03-2025:
+1. Chaining option for methods
+2. sample array 
