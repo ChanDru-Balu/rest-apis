@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-
+const serverless = require('serverless-http')
 const todoRoutes = require('./routes/todo.routes');
 
-const port = 3000 ;
+// const port = 3000 ;
 
 app.use(express.json());
 
@@ -17,6 +17,8 @@ app.use((req,res)=>{
     res.status(404).send('Path not found!');
 })
 
-app.listen(port,()=>{
-    console.log(`Todo app listening on ${port}!`);
-});
+// app.listen(port,()=>{
+//     console.log(`Todo app listening on ${port}!`);
+// });
+
+module.exports.handler = serverless(app)
