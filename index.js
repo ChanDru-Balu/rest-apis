@@ -1,32 +1,19 @@
 const express = require('express');
 const app = express();
+const todoRoutes = require('./routes/todo.routes');
 
-// const todoRoutes = require('./routes/todo.routes');
+app.use(express.json());
 
-// const port = 3000 ;
+app.use('/todo', todoRoutes);
 
-// app.use(express.json());
+app.get('/', (req, res) => {
+    res.send('Welcome, but this is the Boilerplate place only. Use proper routes!');
+});
 
-// app.use('/todo',todoRoutes);
+// Handle 404 routes
+app.use((req, res) => {
+    res.status(404).send('Path not found!');
+});
 
-// app.get('/',(req,res)=>{
-//     res.send('Welcome , But this is the Boiler Plate place only , use propoer routes!')
-// });
-
-// app.use((req,res)=>{
-//     res.status(404).send('Path not found!');
-// })
-
-// app.listen(port,()=>{
-//     console.log(`Todo app listening on ${port}!`);
-// });
-
-const port = 8080;
-
-app.get('/',(req,res)=>{
-    res.send('Welcome!');
-})
-
-app.listen(port,()=>{
-    'Sever started!'
-})
+// Export the app instead of using `app.listen()`
+module.exports = app;
