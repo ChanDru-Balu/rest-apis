@@ -1,0 +1,11 @@
+{ 
+    "version": 2, 
+    "builds": [ { "source": "index.js", "use": "@verce;/node" } ] ,
+    "rewrites": [
+        { 
+            "source": "/(.*)", 
+            "destination": "index.js" 
+            }
+        ] 
+
+}
