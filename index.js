@@ -17,6 +17,8 @@ app.use((req,res)=>{
     res.status(404).send('Path not found!');
 })
 
-app.listen(port,()=>{
-    console.log(`Todo app listening on ${port}!`);
-});
+// app.listen(port,()=>{
+//     console.log(`Todo app listening on ${port}!`);
+// });
+
+module.exports = app
