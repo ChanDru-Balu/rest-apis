@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect('mongodb+srv://prochandru:m1608%231995M@cluster0.aa52g.mongodb.net/rest').then((res)=>console.log(`Connect successfully!`)).catch((error)=>console.error("Error:",error))
-
+// mongoose.connect('mongodb+srv://prochandru:m1608%231995M@cluster0.aa52g.mongodb.net/rest').then((res)=>console.log(`Connect successfully!`)).catch((error)=>console.error("Error:",error))
+mongoose.connect(process.env.MONGODB_URI)
 
 const todoRoutes = require('./routes/todo.routes');
 
