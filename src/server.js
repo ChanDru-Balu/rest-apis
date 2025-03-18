@@ -8,13 +8,13 @@ mongoose.connect(process.env.MONGODB_URI).then((res)=>console.log(`Connect succe
 const port = process.env.PORT ;
 
 const todoRoutes = require('./todo/todo.routes');
-
-
+const authRoutes = require('./auth/user.routes');
 
 app.use(cors());
 app.use(express.json());
 
 app.use('/todo',todoRoutes);
+app.use('/auth',authRoutes);
 
 app.get('/',(req,res)=>{
     res.send('Welcome , But this is the Boiler Plate place only , use propoer routes!')
