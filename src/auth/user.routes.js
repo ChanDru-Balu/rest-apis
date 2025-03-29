@@ -5,6 +5,15 @@ const User = require('./user.model');
 const bcryptjs = require('bcryptjs');
 const generateToken = require('./../utils/token');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../utils/verify');
+
+const redis = require('redis');
+const redisClient = redis.createClient({
+    url: 'redis://localhost:6379'
+});
+redisClient.on('error',err => console.error('Redis Error on:',err));
+
+redisClient.connect()
 
 router.get('/', (req, res) => {
     res.status(200).json('API working fine!');
@@ -62,7 +71,19 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ message: 'login server error', error })
     }
 
-})
+});
+
+router.post('/logout', async (req, res)=>{
+
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if(token){
+        await redisClient.set(token, 'blacklisted', {EX: 900})
+    }
+
+    res.json({message:'logged out successfully!'});
+
+} )
 
 
 module.exports = router;
