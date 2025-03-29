@@ -24,7 +24,6 @@ const verifyToken = async (req,res,next)=>{
     }
 
     const isBlackListed = await redisClient.get(token);
-    console.log({isBlackListed})
     if(isBlackListed){
         return res.status(401).json({message: 'token expired!'})
     }
