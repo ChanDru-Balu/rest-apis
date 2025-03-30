@@ -50,7 +50,6 @@ router.post('/', verifyToken, async (req, res) => {
 
     let { task, status, date } = req.body;
     const user = req.user;
-    console.log({ user })
     const newTodo = new Todo({ task, status, date, user: user._id })
 
     try {
