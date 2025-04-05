@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    let { email, password } = req.body;
+    let { email, mobile, userName , password } = req.body;
     try {
         let user = await User.findOne({ email });
         if (user) {
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
         }
 
         let hashedPassword = await bcryptjs.hash(password, 10);
-        let newUser = new User({ email, password: hashedPassword })
+        let newUser = new User({ email,mobile,userName, password: hashedPassword })
         try {
             await newUser.save(newUser)
             res.status(201).json({ message: 'user created successfully', data: newUser })
