@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect(process.env.MONGODB_URI).then((res)=>console.log(`Connect successfully!`)).catch((error)=>console.error("Error:",error))
+mongoose.connect(process.env.MONGODB_LOCAL_URI).then((res)=>console.log(`Connect successfully!`)).catch((error)=>console.error("Error:",error))
 const port = process.env.PORT ;
 
 const todoRoutes = require('./todo/todo.routes');

@@ -11,7 +11,7 @@ router.get('/', verifyToken, async (req, res) => {
     try {
         let todoList = await Todo.find({user : user._id});
         if (todoList.length == 0) {
-            return res.status(404).send({ message: "No todo" });
+            return res.status(204).send({ message: "No todo" });
         }
         res.status(200).send(todoList);
     } catch (error) {
