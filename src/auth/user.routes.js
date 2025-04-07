@@ -44,19 +44,23 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    let { email, password } = req.body;
+    console.log(req.body)
+    let { password , ...contactInput } = req.body;
+
     try {
-        let user = await User.findOne({ email });
+        console.log({contactInput})
+        let user = await User.findOne(contactInput);
         if (!user) {
             return res.status(404).json({ message: 'user not found!' })
         } else {
+            console.log({user})
             let isLoggedIn = await bcryptjs.compare(password, user.password);
 
             if (isLoggedIn) {
                 try {
                     let token = generateToken(user)
 
-                    res.status(200).json({ message: 'login successfull!', data: {token , user: {email : user.email  , id: user._id}}})
+                    res.status(200).json({ message: 'login successfull!', data: {token , user: {contactInput : user.contactInput  , id: user._id}}})
                 } catch (error) {
                     res.status(500).json({ message: 'JWT error', error })
                 }
