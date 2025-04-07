@@ -22,9 +22,15 @@ router.get('/', (req, res) => {
 router.post('/register', async (req, res) => {
     let { email, mobile, userName , password } = req.body;
     try {
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(404).json({ message: 'User Already Available!' })
+        // let user = await User.findOne({ email });
+        if (await User.findOne({ email })) {
+            return res.status(404).json({ message: 'Email Already Available!' })
+        }
+        if (await User.findOne({ mobile })) {
+            return res.status(404).json({ message: 'Mobile Already Available!' })
+        }
+        if (await User.findOne({ userName })) {
+            return res.status(404).json({ message: 'Username Already Available!' })
         }
 
         let hashedPassword = await bcryptjs.hash(password, 10);
