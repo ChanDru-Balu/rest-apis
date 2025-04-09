@@ -50,11 +50,9 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    console.log(req.body)
     let { password , ...contactInput } = req.body;
 
     try {
-        console.log({contactInput})
         let user = await User.findOne(contactInput);
         if (!user) {
             return res.status(404).json({ message: 'user not found!' })
